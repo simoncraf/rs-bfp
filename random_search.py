@@ -19,7 +19,7 @@ def basin_func_2(x: tuple) -> float:
     """
     return sum(xi**2 for xi in x)
 
-def random_search(basin_function: Callable, goal: str, x_range: tuple[float, float], n: int = 2, args: dict[str, Any] = {}, max_iterations: int = 10000):
+def random_search(basin_function: Callable, goal: str, x_range: tuple[float, float], n: int = 2, kwargs: dict[str, Any] = {}, max_iterations: int = 10000):
     """
     Performs a random search optimization to find the minimum or maximum of the given basin function.
     
@@ -36,7 +36,7 @@ def random_search(basin_function: Callable, goal: str, x_range: tuple[float, flo
     
     for _ in range(max_iterations):
         candidate_solution = np.random.uniform(x_range[0], x_range[1], n)
-        candidate_cost = basin_function(candidate_solution, **args)
+        candidate_cost = basin_function(candidate_solution, **kwargs)
         
         if (goal == 'min' and candidate_cost < y) or (goal == 'max' and candidate_cost > y):
             y = candidate_cost
